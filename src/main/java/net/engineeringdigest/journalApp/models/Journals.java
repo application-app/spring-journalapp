@@ -1,18 +1,22 @@
-package net.engineeringdigest.journalApp.types;
+package net.engineeringdigest.journalApp.models;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Component
+// we are defining the schema to mongodb
+
+@Document(collection="users")
 public class Journals {
-    private Long id;
+    @Id
+    private String id;
     private String name;
     private String mood;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
