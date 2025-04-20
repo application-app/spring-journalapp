@@ -27,4 +27,23 @@ public class Jornalservice {
         return journalrepository.findById(id).orElse(null);
     }
 
+    public boolean updateJournal(String id, Journals updatedJournal) {
+        if (journalrepository.existsById(id)) {
+            updatedJournal.setId(id); // Keep the same ID
+            journalrepository.save(updatedJournal); // Save will overwrite
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteJournal(String id) {
+        if (journalrepository.existsById(id)) {
+            journalrepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+
 }

@@ -50,5 +50,33 @@ public class JounalController {
         }
     }
 
+    @PutMapping
+    public ResponseEntity<String> updateJournal(@RequestParam String id, @RequestBody Journals updatedJournal) {
+        try {
+            boolean updated = this.jornalservice.updateJournal(id, updatedJournal);
+            if (updated) {
+                return ResponseEntity.status(HttpStatus.OK).body("Journal updated successfully!");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Journal with ID " + id + " not found.");
+            }
+        } catch (Exception error) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update journal.");
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteJournal(@RequestParam String id) {
+        try {
+            boolean deleted = this.jornalservice.deleteJournal(id);
+            if (deleted) {
+                return ResponseEntity.status(HttpStatus.OK).body("Journal deleted successfully!");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Journal with ID " + id + " not found.");
+            }
+        } catch (Exception error) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete journal.");
+        }
+    }
+
 
 }
